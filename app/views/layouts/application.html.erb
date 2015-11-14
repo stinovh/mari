@@ -9,6 +9,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if current_order %>
+  <p style="border:1px solid black;padding:10px;">
+    You have <%= pluralize current_order.total_items, 'item'%> in your basket which cost
+    <%= number_to_currency current_order.total %>.
+  </p>
+  <%= link_to "View basket", basket_path %>
+  <%= flash[:notice] %>
+  <% end %>
   <%= yield %>
   <%= javascript_include_tag 'application' %>
   <%= yield(:after_js) %>
